@@ -173,8 +173,7 @@ bool Chunk::readNBT(mc::BlockStateRegistry& block_registry, const char* data, si
 		const nbt::TagString& tag = level.findTag<nbt::TagString>("Status");
 		// completely generated chunks in fresh 1.13 worlds usually have status 'fullchunk' or 'postprocessed'
 		// however, chunks of converted <1.13 worlds don't use these, but the state 'mobs_spawned'
-		if (!(tag.payload == "fullchunk" || tag.payload == "full" || tag.payload == "postprocessed" || tag.payload == "mobs_spawned")) {
-			LOG(WARNING) << "Skipping chunk with payload type: " << tag.payload;
+		if (tag.payload == "empty") {
 			return true;
 		}
 	}
